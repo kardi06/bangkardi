@@ -330,6 +330,20 @@ ul {
   margin-top: 1.5rem;
 }
 
+/* 404 */
+.not-found {
+  padding-block: clamp(3rem, 10vw, 8rem);
+}
+
+.not-found h1 {
+  max-width: 16ch;
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
 /* Footer */
 .site-footer {
   padding-block: 2rem 3rem;
