@@ -12,6 +12,8 @@ interface Props {
 
 const { title = site.title, description = site.description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Crawlers ignore relative og:image URLs; this resolves against SITE_URL.
+const ogImage = new URL('/og.png', Astro.site);
 
 const sameAs = [site.links.linkedin, site.links.github].filter(Boolean);
 const person = {
@@ -40,7 +42,12 @@ const person = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kardi, senior full-stack engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
   </head>
   <body>
