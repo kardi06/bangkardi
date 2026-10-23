@@ -15,9 +15,11 @@ Unknown value => see OPEN. Ask owner. Do not guess.
 phase_done: [0]
 phase_current: 1
 verified:
+  - node: 26.12.1, pnpm 10.28.0 (2026-10-23)
   - pnpm check: 0 errors
-  - pnpm build: ok, 1 page
+  - pnpm build: ok, 2 pages (index, 404)
   - chromium: light, dark, mobile 390px, reduced-motion all ok; no console errors except library warning (below)
+  - 404: noindex, zero JS, deep path /a/b/c serves 404 with styles; no h-scroll at 360/390/768/1280 (Playwright, 2026-10-23)
   - toggle persists in localStorage key "globe-3d" = on|off
   - reduced-motion => 3D off by default, GlobeScene chunk NOT downloaded
 bundle_gzip_kb: {initial_js: ~72, GlobeScene_lazy: ~240}
@@ -91,8 +93,8 @@ process:
 ## OPEN (owner must answer; ask, do not guess)
 ```yaml
 - domain: bangkardi.<tld>    # name settled 2026-10-23; TLD (.com or other) depends on price, owner decides at purchase. keep placeholder https://bangkardi.com until then
-- links.linkedin: <unset>    # owner to send URL
-- links.github: <unset>      # owner to send URL
+- links.linkedin: https://www.linkedin.com/in/kardi-ansyah-64aa9b102/   # owner may switch to a shorter custom URL
+- links.github: https://github.com/kardi06
 - links.cv: ""               # settled 2026-10-23: web CV first (cv.<domain>, Phase 2). stays empty until P2 is live
 - display_name: Kardi        # settled 2026-10-23: "Kardi" brand, "Kardiansyah" legal/footer/JSON-LD
 - phone_public: false        # settled 2026-10-23: email only
@@ -107,8 +109,8 @@ Format: `[ ] id | task | done-when`
 
 ### P1 launch gateway
 ```
-[ ] P1.1 | fill site.ts links from OPEN (only values owner supplied) | no empty CTA row except email
-[ ] P1.2 | 404 page (src/pages/404.astro), same tokens, link home | build emits dist/404.html
+[x] P1.1 | fill site.ts links from OPEN (only values owner supplied) | no empty CTA row except email   # linkedin+github set; cv empty by owner decision until P2
+[x] P1.2 | 404 page (src/pages/404.astro), same tokens, link home | build emits dist/404.html
 [ ] P1.3 | OG image 1200x630 static png in public/, referenced in Base.astro (og:image, twitter summary_large_image) | link preview renders
 [ ] P1.4 | @astrojs/sitemap + robots.txt sitemap line (needs real SITE_URL) | dist/sitemap-index.xml exists
 [ ] P1.5 | Lighthouse mobile run via chromium; fix regressions | perf>=90 a11y=100 best-practices>=95 seo>=95
