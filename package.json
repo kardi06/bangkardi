@@ -1,0 +1,14 @@
+{
+  "name": "bangkardi",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @bangkardi/gateway dev",
+    "build": "pnpm --filter @bangkardi/gateway build",
+    "preview": "pnpm --filter @bangkardi/gateway preview",
+    "check": "pnpm -r --if-present check"
+  }
+}

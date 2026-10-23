@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroGlobe from '../components/HeroGlobe';
+import { byKind } from '@bangkardi/registry';
+import { site } from '../site';
+
+const work = byKind('case-study');
+const labs = byKind('lab').filter((p) => p.status === 'live');
+const year = new Date().getFullYear();
+---
+
+<Base>
+  <header class="site-header wrap">
+    <a class="brand" href="/">{site.shortName}</a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      {labs.length > 0 && <a href="#labs">Labs</a>}
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <h1>I build web products from first requirement to production.</h1>
+        <p class="lede">
+          I'm {site.shortName}, a senior full-stack engineer with 9+ years of shipping SaaS and data
+          platforms with Node.js, TypeScript, NestJS, React and Next.js on AWS and Azure. {site.location}.
+        </p>
+        <p class="actions">
+          <a class="btn" href={`mailto:${site.email}`}>Email me</a>
+          {site.links.cv && <a href={site.links.cv}>Read my CV</a>}
+          {site.links.linkedin && <a href={site.links.linkedin}>LinkedIn</a>}
+          {site.links.github && <a href={site.links.github}>GitHub</a>}
+        </p>
+      </div>
+      <figure class="hero-globe">
+        <HeroGlobe client:idle />
+        <figcaption>
+          The red line is the equator. It crosses West Kalimantan, where I built government systems for
+          six years.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <h2 id="work-title">Work I can walk you through</h2>
+        <ul class="work">
+          {
+            work.map((p) => (
+              <li>
+                <div class="meta">
+                  <p class="when">{p.period}</p>
+                  <p class="where">{p.context}</p>
+                </div>
+                <div class="body">
+                  <h3>{p.title}</h3>
+                  <p>{p.summary}</p>
+                  <p class="stack">{p.stack.join(', ')}</p>
+                  {(p.links.article || p.links.demo || p.links.repo) && (
+                    <p class="item-links">
+                      {p.links.article && <a href={p.links.article}>Read the write-up</a>}
+                      {p.links.demo && <a href={p.links.demo}>Open the demo</a>}
+                      {p.links.repo && <a href={p.links.repo}>View the code</a>}
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    {
+      labs.length > 0 && (
+        <section class="section" id="labs" aria-labelledby="labs-title">
+          <div class="wrap">
+            <h2 id="labs-title">Labs</h2>
+            <ul class="work">
+              {labs.map((p) => (
+                <li>
+                  <div class="meta">
+                    <p class="when">{p.period}</p>
+                  </div>
+                  <div class="body">
+                    <h3>{p.title}</h3>
+                    <p>{p.summary}</p>
+                    <p class="item-links">
+                      {p.links.demo && <a href={p.links.demo}>Open the demo</a>}
+                      {p.links.repo && <a href={p.links.repo}>View the code</a>}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact">
+        <h2 id="contact-title">Hiring, or have a project in mind?</h2>
+        <p>
+          I'm open to senior and squad-lead full-stack roles, and to projects with a clear outcome. Email is
+          the fastest way to reach me.
+        </p>
+        <p class="mail"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p class="actions">
+          {site.links.cv && <a href={site.links.cv}>Read my CV</a>}
+          {site.links.linkedin && <a href={site.links.linkedin}>LinkedIn</a>}
+          {site.links.github && <a href={site.links.github}>GitHub</a>}
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>&copy; {year} {site.name}. {site.location}.</p>
+  </footer>
+</Base>
