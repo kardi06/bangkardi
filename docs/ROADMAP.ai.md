@@ -113,7 +113,7 @@ Format: `[ ] id | task | done-when`
 [x] P1.2 | 404 page (src/pages/404.astro), same tokens, link home | build emits dist/404.html
 [x] P1.3 | OG image 1200x630 static png in public/, referenced in Base.astro (og:image, twitter summary_large_image) | link preview renders   # tags+png verified locally; real preview test after P1.6 (needs live domain). source: porto/_bmad-output/tools/og/
 [x] P1.4 | @astrojs/sitemap + robots.txt sitemap line (needs real SITE_URL) | dist/sitemap-index.xml exists   # robots.txt is an endpoint (src/pages/robots.txt.ts); sitemap+robots+canonical+og follow SITE_URL, set it at P1.6
-[ ] P1.5 | Lighthouse mobile run via chromium; fix regressions | perf>=90 a11y=100 best-practices>=95 seo>=95
+[x] P1.5 | Lighthouse mobile run via chromium; fix regressions | perf>=90 a11y=100 best-practices>=95 seo>=95   # local preview, median of 5: perf 95 a11y 100 bp 100 seo 100. TBT swings 160-830ms from the 3D globe; re-measure live after P1.6; if tight, defer 3D on mobile until first interaction. inline CSS tested: no gain, rejected
 [ ] P1.6 | deploy: Cloudflare Pages, build cmd `pnpm build`, output apps/gateway/dist, env SITE_URL, Node >=22.23.4 | owner confirms URL live
 [ ] P1.7 | Cloudflare Web Analytics (no cookies), UTM convention doc in docs/ | owner confirms
 ```
